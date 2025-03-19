@@ -6,9 +6,7 @@ import { Mode } from '../single-product/SelectProductAmount'
 import FormContainer from '../form/FormContainer'
 import { SubmitButton } from '../form/Buttons'
 import { removeCartItemAction, updateCartItemAction } from '@/utils/actions'
-import { toast } from 'sonner' // ✅ Corrected import
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { Button } from '../ui/button'
+import { toast } from 'sonner'
 
 function ThirdColumn({ quantity, id }: { quantity: number; id: string }) {
   const [amount, setAmount] = useState(quantity)
@@ -16,7 +14,7 @@ function ThirdColumn({ quantity, id }: { quantity: number; id: string }) {
 
   const handleAmountChange = async (value: number) => {
     setIsLoading(true)
-    toast('Calculating...') // ✅ Uses Sonner's toast correctly
+    toast('Calculating...')
 
     const result = await updateCartItemAction({
       amount: value,
@@ -24,8 +22,7 @@ function ThirdColumn({ quantity, id }: { quantity: number; id: string }) {
     })
 
     setAmount(value)
-    toast(result.message) // ✅ Uses Sonner's toast correctly
-
+    toast(result.message)
     setIsLoading(false)
   }
 

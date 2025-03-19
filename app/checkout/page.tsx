@@ -14,18 +14,13 @@ const stripePromise = loadStripe(
 
 export default function CheckoutPage() {
   const searchParams = useSearchParams()
-
   const orderId = searchParams.get('orderId')
   const cartId = searchParams.get('cartId')
 
   const fetchClientSecret = useCallback(async () => {
-    // Create a Checkout Session
-    const response = await axios.post('/api/payment', {
-      orderId: orderId,
-      cartId: cartId,
-    })
+    const response = await axios.post('/api/payment', { orderId, cartId })
     return response.data.clientSecret
-  }, [])
+  }, [orderId, cartId]) // ✅ Added dependencies
 
   const options = { fetchClientSecret }
 

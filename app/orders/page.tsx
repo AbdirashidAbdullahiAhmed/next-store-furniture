@@ -11,6 +11,7 @@ import {
 import SectionTitle from '@/components/global/SectionTitle'
 import { fetchUserOrders } from '@/utils/actions'
 import { formatCurrency, formatDate } from '@/utils/format'
+
 async function OrdersPage() {
   const orders = await fetchUserOrders()
 
@@ -19,7 +20,7 @@ async function OrdersPage() {
       <SectionTitle text="Your Orders" />
       <div>
         <Table>
-          <TableCaption>Total orders : {orders.length}</TableCaption>
+          <TableCaption>Total orders: {orders.length}</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Products</TableHead>
@@ -30,24 +31,22 @@ async function OrdersPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.map((order) => {
-              const { id, products, orderTotal, tax, shipping, createdAt } =
-                order
-
-              return (
-                <TableRow key={order.id}>
-                  <TableCell>{products}</TableCell>
-                  <TableCell>{formatCurrency(orderTotal)}</TableCell>
-                  <TableCell>{formatCurrency(tax)}</TableCell>
-                  <TableCell>{formatCurrency(shipping)}</TableCell>
-                  <TableCell>{formatDate(createdAt)}</TableCell>
-                </TableRow>
-              )
-            })}
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                {' '}
+                {/* ✅ Used id as the key */}
+                <TableCell>{order.products}</TableCell>
+                <TableCell>{formatCurrency(order.orderTotal)}</TableCell>
+                <TableCell>{formatCurrency(order.tax)}</TableCell>
+                <TableCell>{formatCurrency(order.shipping)}</TableCell>
+                <TableCell>{formatDate(order.createdAt)}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
     </>
   )
 }
+
 export default OrdersPage
