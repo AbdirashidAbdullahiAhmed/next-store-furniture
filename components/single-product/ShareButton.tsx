@@ -12,8 +12,12 @@ import {
   EmailShareButton,
   LinkedinShareButton,
   TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
   EmailIcon,
   LinkedinIcon,
+  XIcon,
+
 } from 'react-share'
 
 function ShareButton({ productId, name }: { productId: string; name: string }) {
@@ -32,9 +36,12 @@ function ShareButton({ productId, name }: { productId: string; name: string }) {
         align="end"
         sideOffset={10}
         className="flex items-center gap-x-2 justify-center w-full"
-      >
+      >  <FacebookShareButton url={shareLink} title={name}>
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        
         <TwitterShareButton url={shareLink} title={name}>
-          <TwitterIcon size={32} round />
+          <XIcon size={32} round />
         </TwitterShareButton>
         <LinkedinShareButton url={shareLink} title={name}>
           <LinkedinIcon size={32} round />
